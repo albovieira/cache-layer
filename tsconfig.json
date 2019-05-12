@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "types": ["reflect-metadata", "node"],
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "listEmittedFiles": true,
+        "declarationMap": false,
+        "declaration": true,
+        "sourceMap": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "suppressImplicitAnyIndexErrors": false,
+        "moduleResolution": "node",
+        "outDir": "dist"
+    },
+    "include": [
+        "src/**/*.ts", "tests/setup.ts", "tests/dependencies.ts", "tests/cache-test.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
