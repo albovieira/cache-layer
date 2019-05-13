@@ -1,4 +1,4 @@
-# Cache Layer
+# cache-layer
 
 This package creates a cache according with the informed provider
 
