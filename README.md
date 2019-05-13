@@ -10,6 +10,19 @@ npm install cache-layer
 
 # Usage
 
+## In Memory
+
+```
+    const client = Cache.create({
+      provider: 'in-memory',
+      ttl: 2000
+    });
+    const done = await client.save('hashKey', { name: 'Albo' });
+    const result = await client.getItem('hashKey');
+```
+
+## Redis
+
 ```
     const client = Cache.create({
       provider: 'redis',

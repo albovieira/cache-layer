@@ -1,4 +1,3 @@
-import Options from './models/options';
 import Provider from './models/provider';
 import RedisProvider from './redis-provider';
 import MemoryCacheProvider from './memory-cache-provider';
