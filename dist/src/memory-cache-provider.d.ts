@@ -1,11 +1,11 @@
-import RedisOptions from './models/redis-options';
 import CacheContract from './models/cache-contract';
-export default class RedisProvider implements CacheContract {
+import Options from './models/options';
+export default class MemoryCacheProvider implements CacheContract {
     private client;
     private ttl;
-    constructor(options: RedisOptions);
+    constructor(options: Options);
     getItem(key: any): Promise<any>;
-    hasKey(key: any): Promise<any>;
+    hasKey(key: any): Promise<boolean>;
     deleteKey(key: any): Promise<any>;
     save(key: any, object: any, ttl?: any): Promise<boolean>;
 }

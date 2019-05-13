@@ -1,6 +1,6 @@
 {
   "name": "cache-layer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "ioredis": "^4.9.0",
+    "memory-cache": "^0.2.0",
     "reflect-metadata": "^0.1.13"
   }
 }
