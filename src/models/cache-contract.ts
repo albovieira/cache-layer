@@ -1,5 +1,6 @@
 export default interface CacheContract {
   getItem(key);
   hasKey(key);
-  save(key, object);
+  deleteKey(key);
+  save(key, object, ttl);
 }

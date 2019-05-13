@@ -1,4 +1,4 @@
 export default interface Options {
   provider: string;
-  ttl: number;
+  ttl: number | 0;
 }

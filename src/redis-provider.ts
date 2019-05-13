@@ -25,10 +25,14 @@ export default class RedisProvider implements CacheContract {
     return this.client.exists(key);
   }
 
-  async save(key, object) {
+  async deleteKey(key) {
+    return this.client.del(key);
+  }
+
+  async save(key, object, ttl = null) {
     const saved = await this.client.setex(
       `${key}`,
-      this.ttl,
+      ttl || this.ttl,
       JSON.stringify(object || {})
     );
     return saved === OK;

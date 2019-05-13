@@ -1,6 +1,7 @@
 import Options from './models/options';
 import Provider from './models/provider';
 import RedisProvider from './redis-provider';
+import MemoryCacheProvider from './memory-cache-provider';
 
 export interface CacheContract {
   getItem(key);
@@ -10,7 +11,10 @@ export interface CacheContract {
 
 export class Cache {
   static create(options) {
-    const providers: Provider[] = [{ provider: 'redis', class: RedisProvider }];
+    const providers: Provider[] = [
+      { provider: 'redis', class: RedisProvider },
+      { provider: 'in-memory', class: MemoryCacheProvider }
+    ];
 
     const defaultProvider: Provider = {
       provider: 'redis',
