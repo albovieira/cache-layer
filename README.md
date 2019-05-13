@@ -1,45 +1,27 @@
-# My Project Name
+# Cache Layer
 
-## Topicos
+This package creates a cache according with the informed provider
 
-1. [Motivação](#Motivação)
-2. [Estrutura de pastas](#Estruturadepastas)
-3. [Instalando as dependencias](#Instalandoasdependencias)
-4. [Buildando o projeto](#Buildandooprojeto)
-5. [Testando o projeto](#Testandooprojeto)
-6. [Publicando o projeto](#Publicandooprojeto)
-
-## Motivação
-
-## Estrutura de pastas
+Install with:
 
 ```
-logger
-│   README.md
-│   arquivos de configuração (build, etc)
-│
-└─── dist (Contéudo com o build do projeto]
-│
-│
-└─── src (Conteúdo de desenvolvimento do projeto)
-│
-│
-└─── tests (Contéudo referente a tests, seguindo a mesma estrutura da src)
-
+npm install cache-layer
 ```
 
-## Instalando as dependencias
+# Usage
 
-Execute o seguinte comando no terminal: `npm i`
-
-## Buildando o projeto
-
-Execute o seguinte comando no terminal: `npm run build` este comando irá compilar o typescript e também adicionar os typings (Typescript) e seu arquivo de configuração NPM
-
-## Testando o projeto
-
-Execute no terminal o seguinte comando para rodar os testes unitários: `npm run test`
-
-## Publicando o projeto
-
-Execute no terminal após o _BUILD_ seguinte comando `npm run dist` _(Lembre-se de dar bump na versão do pacote!)_
+```
+    const client = Cache.create({
+      provider: 'redis',
+      host: 'redis-hmg.com.br',
+      container: 'test',
+      port: 6379,
+      ttl: 86400,
+      db: 0,
+      keyPrefix: 'test:',
+      lazyConnect: true,
+      maxRetriesPerRequest: 0
+    });
+    const done = await client.save('hashKey', { name: 'Albo' });
+    const result = await client.getItem('hashKey');
+```
