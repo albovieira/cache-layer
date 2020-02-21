@@ -12,8 +12,8 @@ class Cache {
             { provider: 'in-memory', class: memory_cache_provider_1.default }
         ];
         const defaultProvider = {
-            provider: 'redis',
-            class: redis_provider_1.default
+            provider: 'in-memory',
+            class: memory_cache_provider_1.default
         };
         const provider = providers.find(p => p.provider === options.provider) || defaultProvider;
         const client = new provider.class(options);

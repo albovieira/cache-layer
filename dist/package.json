@@ -1,12 +1,12 @@
 {
   "name": "cache-layer",
-  "version": "1.0.2",
-  "description": "",
+  "version": "1.0.3",
+  "description": "This package creates a cache provider instance",
   "main": "index.js",
   "scripts": {
     "build": "tsc && node setup.js",
     "dist": "npm run build && cd dist && npm publish",
-    "test:unit": "mocha -b -w --recursive --require ts-node/register --watch-extensions ts \"tests/setup.ts\"",
+    "test": "mocha -b -w --recursive --require ts-node/register --watch-extensions ts \"tests/setup.ts\"",
     "test:unit:pipeline": "mocha -b --require ts-node/register --watch-extensions ts \"tests/setup.ts\""
   },
   "author": "Albo Vieira",

@@ -1,8 +1,5 @@
-export interface CacheContract {
-    getItem(key: any): any;
-    hasKey(key: any): any;
-    save(key: any, object: any): any;
+import CacheContract from './models/cache-contract';
+declare class Cache {
+    static create(options: any): CacheContract;
 }
-export declare class Cache {
-    static create(options: any): any;
-}
+export { CacheContract, Cache };

@@ -1,6 +1,6 @@
 export default interface CacheContract {
-    getItem(key: string): any;
-    hasKey(key: string): any;
-    deleteKey(key: string): any;
-    save<T>(key: string, object: T, ttl: number | null): any;
+    get(key: string): any;
+    has(key: string): any;
+    delete(key: string): any;
+    add<T>(key: string, object: T, ttl?: number): any;
 }

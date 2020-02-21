@@ -15,17 +15,17 @@ class RedisProvider {
         });
         this.ttl = options.ttl;
     }
-    async getItem(key) {
+    async get(key) {
         const item = await this.client.get(key);
         return item ? JSON.parse(item) : null;
     }
-    async hasKey(key) {
+    async has(key) {
         return this.client.exists(key);
     }
-    async deleteKey(key) {
+    async delete(key) {
         return this.client.del(key);
     }
-    async save(key, data, ttl) {
+    async add(key, data, ttl) {
         const saved = await this.client.setex(`${key}`, (ttl || this.ttl) * 1000, JSON.stringify(data || {}));
         return saved === OK;
     }

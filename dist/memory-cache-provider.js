@@ -13,17 +13,17 @@ class MemoryCacheProvider {
         this.client = MemoryCache;
         this.ttl = options.ttl;
     }
-    async getItem(key) {
+    async get(key) {
         const item = await this.client.get(key);
         return item ? JSON.parse(item) : null;
     }
-    async hasKey(key) {
+    async has(key) {
         return !!this.client.get(key);
     }
-    async deleteKey(key) {
+    async delete(key) {
         return this.client.del(key);
     }
-    async save(key, data, ttl) {
+    async add(key, data, ttl) {
         const saved = await this.client.put(`${key}`, JSON.stringify(data || {}), ttl || this.ttl);
         return !!saved;
     }
