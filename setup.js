@@ -10,5 +10,8 @@ fs.copy('.npmrc', 'dist/.npmrc')
   .then(c => console.log('.npmrc copied successfully!'))
   .catch(e => console.log(`Error copying .npmrc, Details: ${e}`));
 
+fs.copy('README.md', 'dist/README.md')
+  .then(c => console.log('README.md copied successfully!'))
+  .catch(e => console.log(`Error copying README.md, Details: ${e}`));
 
 console.log('Done! Package ready to publish.');
