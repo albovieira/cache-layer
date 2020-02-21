@@ -1,6 +1,6 @@
 # Cache Layer
 
-> An abstraction for cache providers, it exposes a common interface for diferente ways of cache
+> An abstraction for cache providers, it exposes a common interface for different ways to cache data
 
 **It suports**
 
