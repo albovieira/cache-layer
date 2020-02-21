@@ -10,23 +10,23 @@ export default class MemoryCacheProvider implements CacheContract {
     this.client = MemoryCache;
     this.ttl = options.ttl;
   }
-  async getItem(key) {
+  async get<T>(key: string): Promise<T> {
     const item = await this.client.get(key);
     return item ? JSON.parse(item) : null;
   }
 
-  async hasKey(key) {
+  async has(key: string): Promise<boolean> {
     return !!this.client.get(key);
   }
 
-  async deleteKey(key) {
+  async delete<T>(key: string): Promise<T> {
     return this.client.del(key);
   }
 
-  async save(key, object, ttl = null) {
+  async add<T>(key: string, data: T, ttl?: number): Promise<boolean> {
     const saved = await this.client.put(
       `${key}`,
-      JSON.stringify(object || {}),
+      JSON.stringify(data || {}),
       ttl || this.ttl
     );
     return !!saved;

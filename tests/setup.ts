@@ -1,1 +1,1 @@
-import './cache-test';
+import './cache.spec';

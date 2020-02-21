@@ -4,8 +4,8 @@ export default class MemoryCacheProvider implements CacheContract {
     private client;
     private ttl;
     constructor(options: Options);
-    getItem(key: any): Promise<any>;
-    hasKey(key: any): Promise<boolean>;
-    deleteKey(key: any): Promise<any>;
-    save(key: any, object: any, ttl?: any): Promise<boolean>;
+    getItem(key: string): Promise<any>;
+    hasKey(key: string): Promise<boolean>;
+    deleteKey(key: string): Promise<any>;
+    save<T>(key: string, data: T, ttl: number | null): Promise<boolean>;
 }

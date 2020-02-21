@@ -15,7 +15,7 @@ npm install cache-layer
 ```
     const client = Cache.create({
       provider: 'in-memory',
-      ttl: 2000
+      ttl: 2000 // in milisecconds
     });
     const done = await client.save('hashKey', { name: 'Albo' });
     const result = await client.getItem('hashKey');
@@ -29,7 +29,7 @@ npm install cache-layer
       host: 'redis-hmg.com.br',
       container: 'test',
       port: 6379,
-      ttl: 86400,
+      ttl: 2000, // in milisecconds
       db: 0,
       keyPrefix: 'test:',
       lazyConnect: true,

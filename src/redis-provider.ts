@@ -16,24 +16,24 @@ export default class RedisProvider implements CacheContract {
     });
     this.ttl = options.ttl;
   }
-  async getItem(key) {
+  async get<T>(key: string): Promise<T> {
     const item = await this.client.get(key);
     return item ? JSON.parse(item) : null;
   }
 
-  async hasKey(key) {
+  async has(key: string): Promise<boolean> {
     return this.client.exists(key);
   }
 
-  async deleteKey(key) {
+  async delete<T>(key: string): Promise<T> {
     return this.client.del(key);
   }
 
-  async save(key, object, ttl = null) {
+  async add<T>(key: string, data: T, ttl?: number): Promise<boolean> {
     const saved = await this.client.setex(
       `${key}`,
-      ttl || this.ttl,
-      JSON.stringify(object || {})
+      (ttl || this.ttl) * 1000,
+      JSON.stringify(data || {})
     );
     return saved === OK;
   }

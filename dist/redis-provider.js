@@ -25,8 +25,8 @@ class RedisProvider {
     async deleteKey(key) {
         return this.client.del(key);
     }
-    async save(key, object, ttl = null) {
-        const saved = await this.client.setex(`${key}`, ttl || this.ttl, JSON.stringify(object || {}));
+    async save(key, data, ttl) {
+        const saved = await this.client.setex(`${key}`, (ttl || this.ttl) * 1000, JSON.stringify(data || {}));
         return saved === OK;
     }
 }

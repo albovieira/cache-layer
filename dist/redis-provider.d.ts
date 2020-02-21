@@ -4,8 +4,8 @@ export default class RedisProvider implements CacheContract {
     private client;
     private ttl;
     constructor(options: RedisOptions);
-    getItem(key: any): Promise<any>;
-    hasKey(key: any): Promise<any>;
-    deleteKey(key: any): Promise<any>;
-    save(key: any, object: any, ttl?: any): Promise<boolean>;
+    getItem(key: string): Promise<any>;
+    hasKey(key: string): Promise<any>;
+    deleteKey(key: string): Promise<any>;
+    save<T>(key: string, data: T, ttl: number | null): Promise<boolean>;
 }

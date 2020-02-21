@@ -23,8 +23,8 @@ class MemoryCacheProvider {
     async deleteKey(key) {
         return this.client.del(key);
     }
-    async save(key, object, ttl = null) {
-        const saved = await this.client.put(`${key}`, JSON.stringify(object || {}), ttl || this.ttl);
+    async save(key, data, ttl) {
+        const saved = await this.client.put(`${key}`, JSON.stringify(data || {}), ttl || this.ttl);
         return !!saved;
     }
 }
