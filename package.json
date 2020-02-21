@@ -1,7 +1,7 @@
 {
   "name": "cache-layer",
   "version": "1.0.3",
-  "description": "",
+  "description": "This package creates a cache provider instance",
   "main": "index.js",
   "scripts": {
     "build": "tsc && node setup.js",
