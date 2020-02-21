@@ -1,6 +1,6 @@
 {
   "name": "cache-layer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "An abstraction for cache providers, it exposes a common interface for diferente ways of cache",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,14 @@
     "type": "git",
     "url": "https://github.com/albovieira/cache-layer.git"
   },
+  "keywords": [
+    "cache",
+    "cache-manager",
+    "abstraction",
+    "memcache",
+    "redis",
+    "cache-provider"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.1.6",

@@ -1,6 +1,6 @@
 {
   "name": "cache-layer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "An abstraction for cache providers, it exposes a common interface for diferente ways of cache",
   "main": "index.js",
   "scripts": {
