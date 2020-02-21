@@ -1,4 +1,4 @@
-# Cache Layer
+# Cache Layer [![npm version](https://badge.fury.io/js/cache-layer.svg)](//npmjs.com/package/cache-layer)
 
 > An abstraction for cache providers, it exposes a common interface for different ways to cache data
 
