@@ -104,4 +104,49 @@ describe('Unit tests for Cache', () => {
     result = await promise;
     expect(result).to.be.deep.equal({ name: 'Albo' });
   });
+
+  it('Should add ttl by string format in memorycache', async () => {
+    const client = Cache.create({
+      provider: 'in-memory'
+    });
+
+    const done = await client.add('hashKey', { name: 'Albo' }, '1s');
+    expect(done).to.be.equal(true);
+
+    let result;
+    const promise = new Promise(resolve => {
+      setTimeout(async () => {
+        result = await client.get('hashKey');
+        resolve(result);
+      }, 900);
+    });
+    result = await promise;
+    expect(result).to.be.deep.equal({ name: 'Albo' });
+  });
+
+  it('Should add ttl by string format in redis', async () => {
+    const client = Cache.create({
+      provider: 'redis',
+      host: 'localhost',
+      container: 'test',
+      port: 6379,
+      db: 0,
+      keyPrefix: 'test:',
+      lazyConnect: true,
+      maxRetriesPerRequest: 0
+    });
+
+    const done = await client.add('hashKey', { name: 'Albo' }, '400');
+    expect(done).to.be.equal(true);
+
+    let result;
+    const promise = new Promise(resolve => {
+      setTimeout(async () => {
+        result = await client.get('hashKey');
+        resolve(result);
+      }, 300);
+    });
+    result = await promise;
+    expect(result).to.be.deep.equal({ name: 'Albo' });
+  });
 });

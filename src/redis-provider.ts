@@ -1,4 +1,5 @@
 import Redis from 'ioredis';
+import ms from 'ms';
 import RedisOptions from './models/redis-options';
 import CacheContract from './models/cache-contract';
 
@@ -6,7 +7,7 @@ const OK = 'OK';
 
 export default class RedisProvider implements CacheContract {
   private client: Redis;
-  private ttl: number;
+  private defaultTTL: number;
   constructor(options: RedisOptions) {
     this.client = new Redis(options.port, options.host, {
       db: options.db || 0,
@@ -14,7 +15,9 @@ export default class RedisProvider implements CacheContract {
       lazyConnect: options.lazyConnect,
       maxRetriesPerRequest: options.maxRetriesPerRequest
     });
-    this.ttl = options.ttl;
+    if (options.ttl) {
+      this.defaultTTL = this.getTTL(options.ttl);
+    }
   }
   async get<T>(key: string): Promise<T> {
     const item = await this.client.get(key);
@@ -29,12 +32,22 @@ export default class RedisProvider implements CacheContract {
     return this.client.del(key);
   }
 
-  async add<T>(key: string, data: T, ttl?: number): Promise<boolean> {
+  async add<T>(key: string, data: T, ttl?: string | number): Promise<boolean> {
     const saved = await this.client.setex(
       `${key}`,
-      (ttl || this.ttl) * 1000,
+      this.getTTL(ttl) || this.defaultTTL,
       JSON.stringify(data || {})
     );
     return saved === OK;
+  }
+
+  private getTTL(ttl: number | string): number {
+    let seconds;
+    if (typeof ttl === 'string') {
+      seconds = ms(ttl) / 1000;
+    } else {
+      seconds = ttl / 1000;
+    }
+    return seconds <= 1 ? 1 : seconds;
   }
 }
