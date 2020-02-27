@@ -33,10 +33,6 @@ const client = Cache.create({
   provider: 'in-memory',
   ttl: 2000 // a defautt TTL (miliseconds)
 });
-
-// or you can provide a specific TTL
-const done = await client.add('hashKey', { name: 'John' }, 1000);
-const result = await client.get('hashKey');
 ```
 
 #### Redis
@@ -53,9 +49,19 @@ const client = Cache.create({
   lazyConnect: true,
   maxRetriesPerRequest: 0
 });
+```
 
-// or you can provide a specific TTL
+The TTL is in ms, you can pass a default TTL, or pass it on add method.
+The package implements [zeit/ms](https://github.com/zeit/ms), so is possible to use a string to define the TTL with zeit/ms format
+
+```javascript
 const done = await client.add('hashKey', { name: 'John' }, 1000);
+const result = await client.get('hashKey');
+
+const done = await client.add('hashKey', { name: 'John' }, '1s');
+const result = await client.get('hashKey');
+
+const done = await client.add('hashKey', { name: 'John' }, '1d');
 const result = await client.get('hashKey');
 ```
 
