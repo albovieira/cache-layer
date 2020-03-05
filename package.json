@@ -19,7 +19,9 @@
     "cache",
     "cache-manager",
     "abstraction",
+    "abstract",
     "memcache",
+    "memcached",
     "redis",
     "cache-provider"
   ],
