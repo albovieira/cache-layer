@@ -1,16 +1,21 @@
-import { before, describe, it } from 'mocha';
+import { before, beforeEach, describe, it } from 'mocha';
 import { expect } from 'chai';
 import { Cache } from './dependencies';
 import { ProvidersEnum } from '../src/models/provider';
+import CacheContract from '../src/models/cache-contract';
 
 describe('MemCached', () => {
+  let client: CacheContract;
   before(() => {});
 
-  it('Should get from memCached', async () => {
-    const client = Cache.create({
+  beforeEach(() => {
+    client = Cache.create({
       provider: ProvidersEnum.Memcached,
       ttl: 20000
     });
+  });
+
+  it('Should get from memCached', async () => {
     const done = await client.add('hashKey', { name: 'Albo' });
     expect(done).to.be.equal(true);
     const result = await client.get('hashKey');
@@ -18,10 +23,6 @@ describe('MemCached', () => {
   });
 
   it('Should persist in memCached', async () => {
-    const client = Cache.create({
-      provider: ProvidersEnum.Memcached,
-      ttl: 20000
-    });
     const done = await client.add('hashKey', { name: 'Albo' });
     expect(done).to.be.equal(true);
     const result = await client.get('hashKey');
@@ -29,11 +30,6 @@ describe('MemCached', () => {
   });
 
   it('Should keep in memory for the given time', async () => {
-    const client = Cache.create({
-      provider: ProvidersEnum.Memcached,
-      ttl: 20000
-    });
-
     const done = await client.add('hashKey', { name: 'Albo' }, 50);
     expect(done).to.be.equal(true);
 
@@ -49,11 +45,6 @@ describe('MemCached', () => {
   });
 
   it('Should add ttl by string format in memCached', async () => {
-    const client = Cache.create({
-      provider: ProvidersEnum.Memcached,
-      ttl: 20000
-    });
-
     const done = await client.add('hashKey', { name: 'Albo' }, '2s');
     expect(done).to.be.equal(true);
 

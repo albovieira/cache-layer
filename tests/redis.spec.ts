@@ -1,13 +1,16 @@
 import { before, describe, it } from 'mocha';
 import { expect } from 'chai';
 import { Cache } from './dependencies';
+import CacheContract from '../src/models/cache-contract';
+import { ProvidersEnum } from '../src/models/provider';
 
 describe('Redis', () => {
+  let client: CacheContract;
   before(() => {});
 
-  it('Should get from redis', async () => {
-    const client = Cache.create({
-      provider: 'redis',
+  beforeEach(() => {
+    client = Cache.create({
+      provider: ProvidersEnum.Redis,
       host: 'localhost',
       container: 'test',
       port: 6379,
@@ -17,6 +20,9 @@ describe('Redis', () => {
       lazyConnect: true,
       maxRetriesPerRequest: 0
     });
+  });
+
+  it('Should get from redis', async () => {
     const done = await client.add('teste', { name: 'guarda ai pf' });
     expect(done).to.be.equal(true);
     const result = await client.get('teste');
@@ -24,33 +30,11 @@ describe('Redis', () => {
   });
 
   it('Should persist on redis', async () => {
-    const client = Cache.create({
-      provider: 'redis',
-      host: 'localhost',
-      container: 'test',
-      port: 6379,
-      ttl: 20000,
-      db: 0,
-      keyPrefix: 'test:',
-      lazyConnect: true,
-      maxRetriesPerRequest: 0
-    });
     const done = await client.add('teste', { name: 'guarda ai pf' });
     expect(done).to.be.equal(true);
   });
 
   it('Should keep in redis for the given time', async () => {
-    const client = Cache.create({
-      provider: 'redis',
-      host: 'localhost',
-      container: 'test',
-      port: 6379,
-      db: 0,
-      keyPrefix: 'test:',
-      lazyConnect: true,
-      maxRetriesPerRequest: 0
-    });
-
     const done = await client.add('hashKey', { name: 'Albo' }, 50);
     expect(done).to.be.equal(true);
 
@@ -66,17 +50,6 @@ describe('Redis', () => {
   });
 
   it('Should add ttl by string format in redis', async () => {
-    const client = Cache.create({
-      provider: 'redis',
-      host: 'localhost',
-      container: 'test',
-      port: 6379,
-      db: 0,
-      keyPrefix: 'test:',
-      lazyConnect: true,
-      maxRetriesPerRequest: 0
-    });
-
     const done = await client.add('hashKey', { name: 'Albo' }, '400');
     expect(done).to.be.equal(true);
 
