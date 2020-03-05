@@ -58,8 +58,8 @@ const client = Cache.create({
 
 #### MemCached
 
-To use memcached you need to inform a server or it will set a localhost as default. So, to use it locally, you need to install memcached.
-If you have a memcached server, just inform the hosts
+To use memcached you have to inform a server or it will set a localhost as default. So, to use it locally, you need to install memcached.
+If you have a memcached server, just inform the host
 
 ```shell
 sudo apt-get install memcached
