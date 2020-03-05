@@ -37,6 +37,14 @@ $ npm install cache-layer --save
 - Store a value for a given key
 - If time isn't passed in, it is stored forever
 
+### del
+
+- Delete value for a given key
+
+### has
+
+- Check if key exists on cache
+
 ## Usage
 
 #### InMemory
