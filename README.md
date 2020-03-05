@@ -13,6 +13,7 @@
 ## Sumary
 
 - [Installation](#installation)
+- [API](#api)
 - [Usage](#usage)
 - [Features](#features)
 - [License](#license)
@@ -24,6 +25,17 @@
 ```shell
 $ npm install cache-layer --save
 ```
+
+## API
+
+### get
+
+- Retrieves a value for a given key
+
+### put
+
+- Store a value for a given key
+- If time isn't passed in, it is stored forever
 
 ## Usage
 
@@ -72,7 +84,7 @@ const client = Cache.create({
 });
 ```
 
-The TTL is in ms, you can pass a default value, or add as a third parameter on `add` methods.
+The TTL is in ms, you can pass a default value, or add as a third parameter on `add` method.
 The package implements [zeit/ms](https://github.com/zeit/ms), so is possible to use a string to define the TTL with zeit/ms format
 
 ```javascript
