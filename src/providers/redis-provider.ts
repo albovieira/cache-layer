@@ -8,6 +8,7 @@ const OK = 'OK';
 export default class RedisProvider implements CacheContract {
   private client: Redis;
   private defaultTTL: number;
+
   constructor(options: RedisOptions) {
     if (options.ttl) {
       const ttlNormalize = this.getTTL(options.ttl);
@@ -16,17 +17,19 @@ export default class RedisProvider implements CacheContract {
     }
     this.client = new Redis(options.port, options.host, options);
   }
+
   async get<T>(key: string): Promise<T> {
-    const item = await this.client.get(key);
-    return item ? JSON.parse(item) : null;
+    const value = await this.client.get(key);
+    return value ? JSON.parse(value) : null;
   }
 
   async has(key: string): Promise<boolean> {
     return this.client.exists(key);
   }
 
-  async delete<T>(key: string): Promise<T> {
-    return this.client.del(key);
+  async delete(key: string): Promise<boolean> {
+    const deleted = await this.client.del(key);
+    return deleted > 0;
   }
 
   async add<T>(key: string, data: T, ttl?: string | number): Promise<boolean> {

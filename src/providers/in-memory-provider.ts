@@ -6,22 +6,24 @@ import { Options } from '../models/options';
 export default class InMemoryCacheProvider implements CacheContract {
   private client: MemoryCache;
   private defaultTTL: number;
+
   constructor(options: Options) {
     this.client = MemoryCache;
     if (options.ttl) {
       this.defaultTTL = this.getTTL(options.ttl);
     }
   }
+
   async get<T>(key: string): Promise<T> {
-    const item = await this.client.get(key);
-    return item ? JSON.parse(item) : null;
+    const value = await this.client.get(key);
+    return value ? JSON.parse(value) : null;
   }
 
   async has(key: string): Promise<boolean> {
     return !!this.client.get(key);
   }
 
-  async delete<T>(key: string): Promise<T> {
+  async delete(key: string): Promise<boolean> {
     return this.client.del(key);
   }
 

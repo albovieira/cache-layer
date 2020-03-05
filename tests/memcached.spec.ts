@@ -29,6 +29,20 @@ describe('MemCached', () => {
     expect(result).to.be.deep.equal({ name: 'Albo' });
   });
 
+  it('Should check on redis', async () => {
+    const done = await client.add('teste', { name: 'guarda ai pf' });
+    expect(done).to.be.equal(true);
+    const has = await client.has('teste');
+    expect(has).to.be.equal(has);
+  });
+
+  it('Should delete on redis', async () => {
+    const done = await client.add('teste', { name: 'guarda ai pf' });
+    expect(done).to.be.equal(true);
+    const deleted = await client.delete('teste');
+    expect(deleted).to.be.equal(true);
+  });
+
   it('Should keep in memory for the given time', async () => {
     const done = await client.add('hashKey', { name: 'Albo' }, 50);
     expect(done).to.be.equal(true);
