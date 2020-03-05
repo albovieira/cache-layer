@@ -1,30 +1,46 @@
 import Memcached from 'memcached';
 import ms from 'ms';
-import CacheContract from './models/cache-contract';
-import Options from './models/options';
+import CacheContract from '../models/cache-contract';
+import { MemCachedOptions } from '../models/options';
 
 export default class MemCachedProvider implements CacheContract {
   private client: Memcached;
   private defaultTTL: number;
-  constructor(options: Options) {
-    this.client = new Memcached('localhost:11211');
+  constructor(options: MemCachedOptions) {
     if (options.ttl) {
-      this.defaultTTL = this.getTTL(options.ttl);
+      const ttlNormalize = this.getTTL(options.ttl);
+      this.defaultTTL = ttlNormalize;
+      options.ttl = ttlNormalize;
     }
+    this.client = new Memcached(options.host || 'localhost', options);
   }
   async get<T>(key: string): Promise<T> {
     const item = (await new Promise((resolve, reject) => {
-      this.client.get(key, (err, info) => resolve(info));
+      this.client.get(key, (err, info) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(info);
+      });
     })) as string;
     return item ? JSON.parse(item) : null;
   }
 
   async has(key: string): Promise<boolean> {
-    return true;
+    const item = await this.get(key);
+    return !!item;
   }
 
-  async delete<T>(key: string): Promise<T> {
-    return '' as any;
+  async delete<T>(key: string): Promise<boolean> {
+    const deleted = await new Promise((resolve, reject) => {
+      this.client.del(`${key}`, (err, info) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(info);
+      });
+    });
+    return !!deleted;
   }
 
   async add<T>(key: string, data: T, ttl?: number | string): Promise<boolean> {

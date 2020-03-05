@@ -6,7 +6,7 @@ import { ProvidersEnum } from '../src/models/provider';
 describe('MemCached', () => {
   before(() => {});
 
-  it.only('Should get from memory', async () => {
+  it('Should get from memCached', async () => {
     const client = Cache.create({
       provider: ProvidersEnum.Memcached,
       ttl: 20000
@@ -17,9 +17,10 @@ describe('MemCached', () => {
     expect(result).to.be.deep.equal({ name: 'Albo' });
   });
 
-  it('Should persist in memory', async () => {
+  it('Should persist in memCached', async () => {
     const client = Cache.create({
-      provider: 'in-memory'
+      provider: ProvidersEnum.Memcached,
+      ttl: 20000
     });
     const done = await client.add('hashKey', { name: 'Albo' });
     expect(done).to.be.equal(true);
@@ -29,7 +30,8 @@ describe('MemCached', () => {
 
   it('Should keep in memory for the given time', async () => {
     const client = Cache.create({
-      provider: 'in-memory'
+      provider: ProvidersEnum.Memcached,
+      ttl: 20000
     });
 
     const done = await client.add('hashKey', { name: 'Albo' }, 50);
@@ -46,12 +48,13 @@ describe('MemCached', () => {
     expect(result).to.be.deep.equal({ name: 'Albo' });
   });
 
-  it('Should add ttl by string format in memorycache', async () => {
+  it('Should add ttl by string format in memCached', async () => {
     const client = Cache.create({
-      provider: 'in-memory'
+      provider: ProvidersEnum.Memcached,
+      ttl: 20000
     });
 
-    const done = await client.add('hashKey', { name: 'Albo' }, '1s');
+    const done = await client.add('hashKey', { name: 'Albo' }, '2s');
     expect(done).to.be.equal(true);
 
     let result;

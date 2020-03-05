@@ -1,9 +1,9 @@
 import * as MemoryCache from 'memory-cache';
 import ms from 'ms';
-import CacheContract from './models/cache-contract';
-import Options from './models/options';
+import CacheContract from '../models/cache-contract';
+import { Options } from '../models/options';
 
-export default class MemoryCacheProvider implements CacheContract {
+export default class InMemoryCacheProvider implements CacheContract {
   private client: MemoryCache;
   private defaultTTL: number;
   constructor(options: Options) {

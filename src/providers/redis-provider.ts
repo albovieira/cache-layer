@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 import ms from 'ms';
-import RedisOptions from './models/redis-options';
-import CacheContract from './models/cache-contract';
+import CacheContract from '../models/cache-contract';
+import { RedisOptions } from '../models/options';
 
 const OK = 'OK';
 
@@ -9,15 +9,12 @@ export default class RedisProvider implements CacheContract {
   private client: Redis;
   private defaultTTL: number;
   constructor(options: RedisOptions) {
-    this.client = new Redis(options.port, options.host, {
-      db: options.db || 0,
-      keyPrefix: options.keyPrefix,
-      lazyConnect: options.lazyConnect,
-      maxRetriesPerRequest: options.maxRetriesPerRequest
-    });
     if (options.ttl) {
-      this.defaultTTL = this.getTTL(options.ttl);
+      const ttlNormalize = this.getTTL(options.ttl);
+      this.defaultTTL = ttlNormalize;
+      options.ttl = ttlNormalize;
     }
+    this.client = new Redis(options.port, options.host, options);
   }
   async get<T>(key: string): Promise<T> {
     const item = await this.client.get(key);

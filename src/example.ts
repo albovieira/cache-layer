@@ -4,13 +4,32 @@ import { ProvidersEnum } from './models/provider';
 async function main() {
   const client = Cache.create({
     provider: ProvidersEnum.Memcached,
-    ttl: 1000
+    ttl: 600000
   });
 
-  const test = await client.add('test', { name: 'Albo' });
-  console.log('insertedResykt:', test);
+  const add = await client.add('test', { name: 'Albo' });
+  console.log('add:', add);
+
+  const addWithTTL = await client.add('testTTL', { name: 'AlboTTL' }, '2s');
+  console.log('addWithTTL:', addWithTTL);
+
+  const promise = new Promise(resolve => {
+    setTimeout(async () => {
+      resolve(true);
+    }, 900);
+  });
+  await promise;
+
+  const hasAdd = await client.has('test');
+  console.log('hasAdd', hasAdd);
+  const hasAddWithTTL = await client.has('testTTL');
+  console.log('hasAddWithTTL', hasAddWithTTL);
+
   const valueRecovered = await client.get('test');
-  console.log('value recorevered: ', valueRecovered);
+  console.log('get: ', valueRecovered);
+
+  const valueRecoveredWithTTL = await client.get('testTTL');
+  console.log('getWithTTL: ', valueRecoveredWithTTL);
 }
 
 main();
