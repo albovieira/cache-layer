@@ -1,6 +1,6 @@
 export default interface CacheContract {
-    get(key: string): any;
-    has(key: string): any;
-    delete(key: string): any;
-    add<T>(key: string, object: T, ttl?: number | string): any;
+    get<T>(key: string): Promise<T>;
+    has(key: string): Promise<boolean>;
+    delete(key: string): Promise<boolean>;
+    add<T>(key: string, object: T, ttl?: number | string): Promise<boolean>;
 }

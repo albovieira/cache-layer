@@ -67,7 +67,7 @@ sudo apt-get install memcached
 
 ```javascript
 const client = Cache.create({
-  host: 'localhost' // if any host was informed, it will set localhost as default
+  host: 'localhost:11211' // if any host was informed, it will set localhost as default
   provider: 'memcached',
   ttl: 2000 // a defautt TTL (miliseconds)
 });
