@@ -1,23 +1,19 @@
 {
-    "compilerOptions": {
-        "target": "es2017",
-        "types": ["reflect-metadata", "node"],
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "listEmittedFiles": true,
-        "declarationMap": false,
-        "declaration": true,
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "suppressImplicitAnyIndexErrors": false,
-        "moduleResolution": "node",
-        "outDir": "dist"
-    },
-    "include": [
-        "src/**/*.ts"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "target": "es2017",
+    "types": ["reflect-metadata", "node"],
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "listEmittedFiles": true,
+    "declarationMap": true,
+    "declaration": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "moduleResolution": "node",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
