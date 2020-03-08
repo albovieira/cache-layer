@@ -9,3 +9,4 @@ export declare enum ProvidersEnum {
 }
 declare type ProviderName = 'redis' | 'memcached' | 'in-memory';
 export {};
+//# sourceMappingURL=provider.d.ts.map
