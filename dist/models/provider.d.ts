@@ -7,6 +7,5 @@ export declare enum ProvidersEnum {
     Memcached = "memcached",
     InMemory = "redis"
 }
-declare type ProviderName = 'redis' | 'memcached' | 'in-memory';
-export {};
+export declare type ProviderName = 'redis' | 'memcached' | 'in-memory';
 //# sourceMappingURL=provider.d.ts.map

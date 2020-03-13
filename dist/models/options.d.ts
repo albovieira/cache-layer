@@ -1,6 +1,7 @@
+import { ProviderName } from './provider';
 export interface Options {
-    provider: string;
-    ttl: number | 0;
+    provider: ProviderName;
+    ttl: number | string;
 }
 export interface RedisOptions extends Options {
     host: string;
@@ -9,7 +10,7 @@ export interface RedisOptions extends Options {
     keyPrefix?: string;
     lazyConnect?: string;
     maxRetriesPerRequest?: number;
-    family: string;
+    family?: string;
     path?: string;
     keepAlive?: number;
     noDelay?: boolean;

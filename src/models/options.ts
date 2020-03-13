@@ -12,7 +12,7 @@ export interface RedisOptions extends Options {
   keyPrefix?: string;
   lazyConnect?: string;
   maxRetriesPerRequest?: number;
-  family: string;
+  family?: string;
   path?: string;
   keepAlive?: number;
   noDelay?: boolean;
