@@ -1,5 +1,7 @@
+import { ProviderName } from './provider';
+
 export interface Options {
-  provider: string;
+  provider: ProviderName;
   ttl: number | string;
 }
 

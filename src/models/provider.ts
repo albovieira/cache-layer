@@ -8,4 +8,4 @@ export enum ProvidersEnum {
   Memcached = 'memcached',
   InMemory = 'redis'
 }
-type ProviderName = 'redis' | 'memcached' | 'in-memory';
+export type ProviderName = 'redis' | 'memcached' | 'in-memory';
