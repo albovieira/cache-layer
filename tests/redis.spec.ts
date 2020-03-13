@@ -11,6 +11,7 @@ import {
   shouldKeepForATime,
   shouldAddTTLByStringFormat
 } from './base-test';
+import { RedisOptions } from '../src';
 
 describe('Redis', () => {
   let client: CacheContract;
@@ -27,7 +28,7 @@ describe('Redis', () => {
       keyPrefix: 'test:',
       lazyConnect: true,
       maxRetriesPerRequest: 0
-    });
+    } as RedisOptions);
   });
 
   it('Should get', async () => {
