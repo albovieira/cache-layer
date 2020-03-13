@@ -1,6 +1,6 @@
 export interface Options {
   provider: string;
-  ttl: number | 0;
+  ttl: number | string;
 }
 
 export interface RedisOptions extends Options {
