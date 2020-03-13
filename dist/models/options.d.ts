@@ -43,3 +43,4 @@ export interface MemCachedOptions extends Options {
     keyCompression?: boolean;
     idle?: number;
 }
+//# sourceMappingURL=options.d.ts.map

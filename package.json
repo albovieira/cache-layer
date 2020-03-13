@@ -1,6 +1,10 @@
 {
   "name": "cache-layer",
+<<<<<<< HEAD
   "version": "1.0.16",
+=======
+  "version": "1.0.17",
+>>>>>>> 69e88d83e2f2a18bb08f5b727ff18b7c6198f693
   "description": "An abstraction for cache providers, it exposes a common interface for diferente ways of cache",
   "main": "index.js",
   "scripts": {
@@ -40,6 +44,7 @@
   },
   "dependencies": {
     "ioredis": "^4.9.0",
+    "memcached": "^2.2.2",
     "memory-cache": "^0.2.0",
     "ms": "^2.1.2",
     "reflect-metadata": "^0.1.13"

@@ -4,3 +4,4 @@ export default interface CacheContract {
     delete(key: string): Promise<boolean>;
     add<T>(key: string, object: T, ttl?: number | string): Promise<boolean>;
 }
+//# sourceMappingURL=cache-contract.d.ts.map
