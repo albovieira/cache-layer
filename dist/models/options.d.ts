@@ -1,7 +1,7 @@
 import { ProviderName } from './provider';
 export interface Options {
     provider: ProviderName;
-    ttl: number | string;
+    ttl?: number | string;
 }
 export interface RedisOptions extends Options {
     host: string;
