@@ -5,10 +5,10 @@ export interface Options {
 }
 export interface RedisOptions extends Options {
     host: string;
-    db: string;
+    db: number;
     port: number;
     keyPrefix?: string;
-    lazyConnect?: string;
+    lazyConnect?: boolean;
     maxRetriesPerRequest?: number;
     family?: string;
     path?: string;
