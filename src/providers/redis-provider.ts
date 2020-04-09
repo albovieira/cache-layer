@@ -4,6 +4,7 @@ import CacheContract from '../models/cache-contract';
 import { RedisOptions } from '../models/options';
 
 const OK = 'OK';
+const NOT_OK = 'NOT_OK';
 
 export default class RedisProvider implements CacheContract {
   private client: Redis;
@@ -33,11 +34,17 @@ export default class RedisProvider implements CacheContract {
   }
 
   async add<T>(key: string, data: T, ttl?: string | number): Promise<boolean> {
-    const saved = await this.client.setex(
-      `${key}`,
-      this.getTTL(ttl) || this.defaultTTL,
-      JSON.stringify(data || {})
-    );
+    const expireAt = this.getTTL(ttl) || this.defaultTTL;
+    let saved = NOT_OK;
+    if (expireAt) {
+      saved = await this.client.setex(
+        `${key}`,
+        this.getTTL(ttl) || this.defaultTTL,
+        JSON.stringify(data || {})
+      );
+    } else {
+      saved = await this.client.set(`${key}`, JSON.stringify(data || {}));
+    }
     return saved === OK;
   }
 

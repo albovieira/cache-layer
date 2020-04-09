@@ -9,7 +9,7 @@ import {
   shouldCheck,
   shouldDelete,
   shouldKeepForATime,
-  shouldAddTTLByStringFormat
+  shouldAddTTLByStringFormat,
 } from './base-test';
 import { RedisOptions } from '../src';
 
@@ -27,7 +27,7 @@ describe('Redis', () => {
       db: 0,
       keyPrefix: 'test:',
       lazyConnect: true,
-      maxRetriesPerRequest: 0
+      maxRetriesPerRequest: 0,
     } as RedisOptions);
   });
 
